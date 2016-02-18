@@ -1,0 +1,17 @@
+import getopt
+import sys
+import os
+import nene
+
+
+usage_string = """
+
+    purge [-c/--cpcode <cpcode>]
+    [-a/--arl <ARL>]
+    [--default][--emergency]
+
+"""
+
+def usage(status=1):
+    print(usage_string)
+    sys.exit(status)

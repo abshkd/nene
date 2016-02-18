@@ -18,26 +18,3 @@
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
-
-import platform
-import os
-import sys
-import logging
-import logging.config
-from config.config import Config
-
-__version__ = '0.1.0'
-Version = __version__  # for backwaed compatibility
-
-
-UserAgent = 'Nene/%s Python/%s %s/%s' % (
-    __version__,
-    platform.python_version(),
-    platform.system(),
-    platform.release()
-)
-
-config = Config()
-token = config.get('Client','Token')
-secret = config.get('Client','Secret')
-access_token = config.get('Client','Access-Token')

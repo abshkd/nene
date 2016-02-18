@@ -1,5 +1,5 @@
 ##
-## boto/cacerts/cacerts.txt -- Bundle of CA Root Certificates
+#nen/cacerts/cacerts.txt -- Bundle of CA Root Certificates
 ##
 ## Certificate data from Mozilla downloaded on: Wed Aug 20 03:12:04 2014
 ##
