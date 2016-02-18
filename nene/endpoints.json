@@ -1,0 +1,33 @@
+{
+  "luna" :{
+    "alerts" : "luna.akamaiapis.net"
+  },
+  "web" : {  },
+
+  "purge" : {
+    "ccu" : "purge.akamaiapis.net/ccu/v2/"
+  },
+
+  "dns" :{
+
+  },
+  "security" :{
+
+  },
+  "media":{
+
+  },
+  "netstorage" :{
+
+  },
+  "gtm" : {
+
+  },
+  "security" : {
+
+  },
+  "property-manager" : {
+
+  }
+
+}
