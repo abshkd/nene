@@ -25,6 +25,7 @@ import sys
 import logging
 import logging.config
 from config.config import Config
+import simplejson as json
 
 __version__ = '0.1.0'
 Version = __version__  # for backwaed compatibility
@@ -36,8 +37,25 @@ UserAgent = 'Nene/%s Python/%s %s/%s' % (
     platform.system(),
     platform.release()
 )
+EXISTING_ENDPOINTS_FILE = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    'nene', 'endpoints.json')
+
+
+def load_endpoint_json(path):
+    """
+    Loads a given JSON file & returns it.
+    :param path: The path to the JSON file
+    :type path: string
+    :returns: The loaded data
+    """
+    with open(path, 'r') as endpoints_file:
+        return json.load(endpoints_file)
+
+endpoints = load_endpoint_json(EXISTING_ENDPOINTS_FILE)
 
 config = Config()
 token = config.get('Client','Token')
 secret = config.get('Client','Secret')
 access_token = config.get('Client','Access-Token')
+service_hostname = config.get('Client','Hostname')
