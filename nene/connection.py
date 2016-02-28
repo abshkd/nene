@@ -44,17 +44,27 @@ class Request:
     def contruct_auth_headers(self):
         nonce = self.__generate_nonce()
         timestamp = self.__timestamp()
-        header_keys = {'client-token' : nene.token,'access-token' : nene.access_token,'timestamp' : timestamp, 'nonce' : nonce}
-        signing_key = hmac.new(nene.secret,msg=timestamp,digestmod=hashlib.sha256).digest()
+        header_keys = [('client-token', self.token),('access-token', self.access_token),('timestamp',timestamp), ('nonce' , nonce)]
+        auth_header = "EG1-HMAC-SHA256 " + ';'.join([ "%s=%s" % h for h in header_keys]) + ';'
+        return auth_header
 
     def connect_purge(self):
         url = 'https://'+nene.service_hostname + '.' +  nene.endpoints['ccu']['queues']
         params  = urlparse.urlparse(url)
-        header = '''
-        EG1-HMAC-SHA256
-        '''
+
     def __generate_nonce(self):
         return lambda length: filter(lambda s: s.isalpha(), b64encode(urandom(length * 2)))[:length]
 
     def __timestamp(self):
         return pytz.datetime.datetime.utcnow().strftime('%Y%m%dT%H%M%S%z')
+
+    def base64_hmac_sha256(data, key):
+        return b64encode(
+            hmac.new(key.encode('utf8'), data.encode('utf8'), hashlib.sha256).digest()
+                ).decode('utf8')
+
+    def content_hash(self, data):
+         return b64encode(hashlib.sha256(data.encode('utf8')).digest()).decode('utf8')
+
+    def __sign_key(self,timestamp):
+        return  self.base64_hmac_sha256(timestamp,self.secret)
