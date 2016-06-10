@@ -31,7 +31,9 @@ from base64 import b64encode
 from os import urandom
 import hmac
 import hashlib
+from akamai.edgegrid import EdgeGridAuth
 
+#migrate to edgedrid fork
 
 class Request:
 
